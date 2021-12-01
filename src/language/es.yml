@@ -1,0 +1,13 @@
+messages:
+  first_position: '&aPrimera posición fijada.'
+  second_position: '&aSegunda posición fijada.'
+  selected_region: '&aCompletada la selección de una región, {amount} bloques seleccionados.'
+  filled_region: '&aRegion llenada con exito.'
+  insufficient_items: '&cNo se han encontrado suficientes items para realizar esta acción.'
+  stick_obtained: '&aHas obtenido el palo para usar Survival World Edit.'
+  stick_delivered: '&aEl palo para usar Survival World Edit ha sido entregado a {player}.'
+  offline_player: '&cEse jugador no esta en linea.'
+  loaded_language: 'El idioma Español ha cargado correctamente.'
+  correct_use: '&cUso correcto: {correct_use}'
+items:
+  stick_name: '&e&lPalo &6&lSWE'

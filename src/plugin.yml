@@ -1,0 +1,16 @@
+name: SurvivalWorldEdit
+version: 1.0.0
+main: org.jachi.whirss.survivalworldedit.Main
+author: Whirss
+api-version: 1.17
+load: STARTUP
+
+commands:
+  stick:
+    aliases: [ wand ]
+    description: Obtain the magic stick for using Survival World Edit
+    usage: /stick [action]
+  place:
+    aliases: [ set ]
+    description: Places blocks quickly
+    usage: /place [action]

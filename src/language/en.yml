@@ -1,0 +1,13 @@
+messages:
+  first_position: '&aFirst position set.'
+  second_position: '&aSecond position set.'
+  selected_region: '&aSuccesfully selected a region, {amount} blocks selected.'
+  filled_region: '&aSuccesfully filled the region.'
+  insufficient_items: '&cNot enough items have been found to perform this action.'
+  stick_obtained: '&aYou have obtained the stick to use Survival World Edit.'
+  stick_delivered: '&aThe stick to use Survival World Edit has been delivered to {player}.'
+  offline_player: '&cThis player is not online.'
+  loaded_language: 'The language English has been loaded successfully.'
+  correct_use: '&cCorrect use: {correct_use}'
+items:
+  stick_name: '&6&lSWE &e&lStick'
