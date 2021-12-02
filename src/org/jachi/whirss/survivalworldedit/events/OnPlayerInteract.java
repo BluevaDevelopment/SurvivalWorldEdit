@@ -21,7 +21,8 @@ public class OnPlayerInteract implements Listener {
     @EventHandler
     public void OnPlayerInteract(PlayerInteractEvent event) {
         if (event.getPlayer().getGameMode() == GameMode.SURVIVAL &&
-                event.getPlayer().getItemInHand().getType() == Material.STICK) {
+                event.getPlayer().getInventory().getItemInMainHand().equals(Material.STICK) &&
+                event.getPlayer().getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals(main.getLanguages().getString("items.stick_name"))) {
             if (event.getAction() == Action.LEFT_CLICK_BLOCK) {
                 main.pos1.put(event.getPlayer().getName(), event.getClickedBlock().getLocation());
                 event.setCancelled(true);

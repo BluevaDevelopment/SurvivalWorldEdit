@@ -39,7 +39,7 @@ public class StickCommand implements CommandExecutor {
                             target.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("messages.stick_obtained")));
                             sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("messages.stick_delivered").replace("{player}", target.getName())));
                         } else {
-                            sender.sendMessage("jugador offline");
+                            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("messages.offline_player")));
                         }
                     }
                 } else {
@@ -71,11 +71,11 @@ public class StickCommand implements CommandExecutor {
                         target.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("messages.stick_obtained")));
                         sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("messages.stick_delivered").replace("{player}", target.getName())));
                     } else {
-                        sender.sendMessage("jugador offline");
+                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("messages.offline_player")));
                     }
                 }
             } else {
-                sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("console.other.use_feed_command")));
+                sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("messages.correct_use").replace("{correct_use}", "/stick [PLAYER]")));
             }
         }
         return true;
