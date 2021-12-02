@@ -14,6 +14,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.jachi.whirss.survivalworldedit.commands.PlaceCommand;
 import org.jachi.whirss.survivalworldedit.commands.StickCommand;
 import org.jachi.whirss.survivalworldedit.events.OnPlayerInteract;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -26,8 +27,7 @@ public class Main extends JavaPlugin {
     public HashMap<String, Location> pos2 = new HashMap<>();
 
     //languages
-    private FileConfiguration languages = null;
-    private File languagesFile = null;
+    private FileConfiguration languages = null;    private File languagesFile = null;
     private FileConfiguration es = null;
     private File esFile = null;
 
@@ -43,6 +43,7 @@ public class Main extends JavaPlugin {
         Bukkit.getConsoleSender().sendMessage("");
 
         registerConfig();
+        checkPlugin();
 
         if(getConfig().getString("language").equals("en") || getConfig().getString("language").equals("es")) {
             registerLanguages();
@@ -56,9 +57,6 @@ public class Main extends JavaPlugin {
         if(getConfig().getBoolean("metrics")) {
             int pluginId = 13455;
             Metrics metrics = new Metrics(this, pluginId);
-        }
-        if(getConfig().getString("no-modify").equals("a1")) {
-            Bukkit.getConsoleSender().sendMessage("[SurvivalWorldEdit] Info: %%__USER__%% - %%__RESOURCE__%%");
         }
     }
 
@@ -81,7 +79,28 @@ public class Main extends JavaPlugin {
         this.getCommand("stick").setExecutor(new StickCommand(this));
     }
 
-    public boolean removeInventoryItems(Inventory inv, Material type, int amount) {
+    public void checkPlugin() {
+        if(Bukkit.getVersion().contains("1.17") || Bukkit.getVersion().contains("1.18")) {
+            if(getConfig().getString("no-modify").equals("")) {}
+            new UpdateChecker(this, 98035).getVersion(version -> {
+                if (!this.getDescription().getVersion().equals(version)) {
+                    Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + " ______        _______       _   _ ____  ____    _  _____ _____");
+                    Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "/ ___\\ \\      / | ____|     | | | |  _ \\|  _ \\  / \\|_   _| ____|");
+                    Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "\\___ \\\\ \\ /\\ / /|  _|       | | | | |_) | | | |/ _ \\ | | |  _|");
+                    Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + " ___) |\\ V  V / | |___      | |_| |  __/| |_| / ___ \\| | | |___");
+                    Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "|____/  \\_/\\_/  |_____|      \\___/|_|   |____/_/   \\_|_| |_____|");
+                    Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "");
+                    Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "A new version of Survival World Edit is available.");
+                    Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "Download: https://www.spigotmc.org/resources/98035/");
+                }
+            });
+        } else {
+            Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "[SurvivalWorldEdit] It has been detected that you are using a version of Spigot incompatible with the plugin. Disabling plugin...");
+            getServer().getPluginManager().disablePlugin(this);
+        }
+    }
+
+    public boolean removeInventoryItems(@NotNull Inventory inv, Material type, int amount) {
         int ra = amount;
         boolean succeeded = false;
         for (ItemStack is : inv.getContents()) {
@@ -111,7 +130,7 @@ public class Main extends JavaPlugin {
         return succeeded;
     }
 
-    public static List<org.bukkit.block.Block> blocksFromTwoPoints(Location loc1, Location loc2) {
+    public static @NotNull List<org.bukkit.block.Block> blocksFromTwoPoints(@NotNull Location loc1, @NotNull Location loc2) {
         List<org.bukkit.block.Block> blocks = new ArrayList<>();
         int topBlockX = (loc1.getBlockX() < loc2.getBlockX()) ? loc2.getBlockX() : loc1.getBlockX();
         int bottomBlockX = (loc1.getBlockX() > loc2.getBlockX()) ? loc2.getBlockX() : loc1.getBlockX();
