@@ -7,6 +7,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.jachi.whirss.survivalworldedit.Main;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -19,7 +20,7 @@ public class OnPlayerInteract implements Listener {
     }
 
     @EventHandler
-    public void OnPlayerInteract(PlayerInteractEvent event) {
+    public void OnPlayerInteract(@NotNull PlayerInteractEvent event) {
         if (event.getPlayer().getGameMode() == GameMode.SURVIVAL &&
                 event.getPlayer().getInventory().getItemInMainHand().equals(Material.STICK) &&
                 event.getPlayer().getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals(main.getLanguages().getString("items.stick_name"))) {

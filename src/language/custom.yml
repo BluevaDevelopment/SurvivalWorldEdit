@@ -1,0 +1,13 @@
+messages:
+  first_position: '&a().'
+  second_position: '&a().'
+  selected_region: '&a().'
+  filled_region: '&a().'
+  insufficient_items: '&c().'
+  stick_obtained: '&a().'
+  stick_delivered: '&a() {player}.'
+  offline_player: '&c().'
+  loaded_language: '().'
+  correct_use: '&c(): {correct_use}'
+items:
+  stick_name: '&6&l() &e&l()'

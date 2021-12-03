@@ -27,4 +27,6 @@ metrics: true
 # Available languages:
 # English: en
 # Spanish: es
+# French: fr
+# Custom language: custom
 language: en

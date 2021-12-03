@@ -1,0 +1,13 @@
+messages:
+  first_position: '&aPremière position fixée.'
+  second_position: '&aDeuxième position fixée.'
+  selected_region: '&aVous avez réussi à sélectionner une région, {amount} blocs sélectionnés.'
+  filled_region: '&aLa région a été remplie avec succès.'
+  insufficient_items: '&cOn n''a pas trouvé assez d''éléments pour effectuer cette action.'
+  stick_obtained: '&aVous avez obtenu le stick pour utiliser Survival World Edit.'
+  stick_delivered: '&aLe bâton pour utiliser Survival World Edit a été livré à {player}.'
+  offline_player: '&cCe joueur n''est pas en ligne.'
+  loaded_language: 'La langue Frances a été chargée avec succès.'
+  correct_use: '&cUtilisation correcte: {correct_use}'
+items:
+  stick_name: '&6&lSWE &e&lBâton'

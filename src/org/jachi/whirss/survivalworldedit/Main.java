@@ -14,6 +14,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.jachi.whirss.survivalworldedit.commands.PlaceCommand;
 import org.jachi.whirss.survivalworldedit.commands.StickCommand;
 import org.jachi.whirss.survivalworldedit.events.OnPlayerInteract;
+import org.jachi.whirss.survivalworldedit.events.OnPlayerJoin;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.*;
@@ -30,6 +31,10 @@ public class Main extends JavaPlugin {
     private FileConfiguration languages = null;    private File languagesFile = null;
     private FileConfiguration es = null;
     private File esFile = null;
+    private FileConfiguration fr = null;
+    private File frFile = null;
+    private FileConfiguration custom = null;
+    private File customFile = null;
 
     public void onEnable() {
         RegisterEvents();
@@ -45,9 +50,12 @@ public class Main extends JavaPlugin {
         registerConfig();
         checkPlugin();
 
-        if(getConfig().getString("language").equals("en") || getConfig().getString("language").equals("es")) {
+        if(getConfig().getString("language").equals("en") || getConfig().getString("language").equals("es")
+                || getConfig().getString("language").equals("fr") || getConfig().getString("language").equals("custom")) {
             registerLanguages();
             registerEs();
+            registerFr();
+            registerCustom();
             Bukkit.getConsoleSender().sendMessage("[SurvivalWorldEdit] " + getLanguages().getString("messages.loaded_language"));
         } else {
             Bukkit.getConsoleSender().sendMessage("[SurvivalWorldEdit] Error getting the language set in config.yml");
@@ -72,6 +80,7 @@ public class Main extends JavaPlugin {
     public void RegisterEvents() {
         PluginManager pm = getServer().getPluginManager();
         pm.registerEvents(new OnPlayerInteract(this), this);
+        pm.registerEvents(new OnPlayerJoin(this), this);
     }
 
     public void RegisterCommands() {
@@ -209,7 +218,7 @@ public class Main extends JavaPlugin {
         }
     }
 
-    //es_--.yml:
+    //es.yml:
     public FileConfiguration getEs() {
         if(es == null) {
             reloadEs();
@@ -256,4 +265,101 @@ public class Main extends JavaPlugin {
             saveEs();
         }
     }
+
+    //fr.yml:
+    public FileConfiguration getFr() {
+        if(fr == null) {
+            reloadFr();
+        }
+        return fr;
+    }
+
+    public void reloadFr(){
+        if(fr == null){
+            frFile = new File(getDataFolder(), "/language/fr.yml");
+        }
+        fr = YamlConfiguration.loadConfiguration(frFile);
+        Reader defConfigStream;
+        try{
+            defConfigStream = new InputStreamReader(this.getResource("language/fr.yml"),"UTF8");
+            if(defConfigStream != null){
+                YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defConfigStream);
+                fr.setDefaults(defConfig);
+            }
+        }catch(UnsupportedEncodingException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void saveFr(){
+        try{
+            fr.save(frFile);
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void registerFr(){
+        frFile = new File(this.getDataFolder(), "/language/fr.yml");
+        if(!frFile.exists()){
+            Bukkit.getConsoleSender().sendMessage("[SurvivalWorldEdit] Creating new file: \\plugins\\SurvivalWorldEdit\\language\\fr.yml");
+            this.getFr().options().copyDefaults(true);
+            getFr().options().header(" ____                   _            ___        __         _     _ _____    _ _ _\n" +
+                    "/ ___| _   _ _ ____   _(___   ____ _| \\ \\      / ___  _ __| | __| | ____|__| (_| |_\n" +
+                    "\\___ \\| | | | '__\\ \\ / | \\ \\ / / _` | |\\ \\ /\\ / / _ \\| '__| |/ _` |  _| / _` | | __|\n" +
+                    " ___) | |_| | |   \\ V /| |\\ V | (_| | | \\ V  V | (_) | |  | | (_| | |__| (_| | | |_\n" +
+                    "|____/ \\__,_|_|    \\_/ |_| \\_/ \\__,_|_|  \\_/\\_/ \\___/|_|  |_|\\__,_|_____\\__,_|_|\\__|\n" +
+                    "");
+            saveFr();
+        }
+    }
+
+    //custom.yml:
+    public FileConfiguration getCustom() {
+        if(custom == null) {
+            reloadCustom();
+        }
+        return custom;
+    }
+
+    public void reloadCustom(){
+        if(custom == null){
+            customFile = new File(getDataFolder(), "/language/custom.yml");
+        }
+        custom = YamlConfiguration.loadConfiguration(customFile);
+        Reader defConfigStream;
+        try{
+            defConfigStream = new InputStreamReader(this.getResource("language/custom.yml"),"UTF8");
+            if(defConfigStream != null){
+                YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defConfigStream);
+                custom.setDefaults(defConfig);
+            }
+        }catch(UnsupportedEncodingException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void saveCustom(){
+        try{
+            custom.save(customFile);
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void registerCustom(){
+        customFile = new File(this.getDataFolder(), "/language/custom.yml");
+        if(!customFile.exists()){
+            Bukkit.getConsoleSender().sendMessage("[SurvivalWorldEdit] Creating new file: \\plugins\\SurvivalWorldEdit\\language\\custom.yml");
+            this.getCustom().options().copyDefaults(true);
+            getCustom().options().header(" ____                   _            ___        __         _     _ _____    _ _ _\n" +
+                    "/ ___| _   _ _ ____   _(___   ____ _| \\ \\      / ___  _ __| | __| | ____|__| (_| |_\n" +
+                    "\\___ \\| | | | '__\\ \\ / | \\ \\ / / _` | |\\ \\ /\\ / / _ \\| '__| |/ _` |  _| / _` | | __|\n" +
+                    " ___) | |_| | |   \\ V /| |\\ V | (_| | | \\ V  V | (_) | |  | | (_| | |__| (_| | | |_\n" +
+                    "|____/ \\__,_|_|    \\_/ |_| \\_/ \\__,_|_|  \\_/\\_/ \\___/|_|  |_|\\__,_|_____\\__,_|_|\\__|\n" +
+                    "");
+            saveCustom();
+        }
+    }
+
 }

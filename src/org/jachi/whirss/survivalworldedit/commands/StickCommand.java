@@ -27,7 +27,8 @@ public class StickCommand implements CommandExecutor {
             if (args.length > 0) {
                 if (sender.hasPermission("swe.*") ||
                         sender.hasPermission("swe.stick") ||
-                        sender.hasPermission("swe.stick.others")) {
+                        sender.hasPermission("swe.stick.others") ||
+                        sender.hasPermission("swe.admin")) {
                     if (args.length == 1) {
                         Player target = Bukkit.getPlayer(args[0]);
                         if (target != null) {
@@ -47,7 +48,8 @@ public class StickCommand implements CommandExecutor {
                 }
             } else {
                 if (sender.hasPermission("swe.*") ||
-                        sender.hasPermission("swe.stick"))  {
+                        sender.hasPermission("swe.stick") ||
+                        sender.hasPermission("swe.admin"))  {
                     ItemStack itemStack = new ItemStack(Material.STICK);
                     ItemMeta meta = itemStack.getItemMeta();
                     meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("items.stick_name")));
