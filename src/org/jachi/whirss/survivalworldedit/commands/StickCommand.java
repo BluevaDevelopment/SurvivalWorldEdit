@@ -12,6 +12,9 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jachi.whirss.survivalworldedit.Main;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class StickCommand implements CommandExecutor {
 
     private Main main;
@@ -35,6 +38,7 @@ public class StickCommand implements CommandExecutor {
                             ItemStack itemStack = new ItemStack(Material.STICK);
                             ItemMeta meta = itemStack.getItemMeta();
                             meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("items.stick_name")));
+                            meta.setLore(Arrays.asList("SWE"));
                             itemStack.setItemMeta(meta);
                             target.getInventory().addItem(itemStack);
                             target.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("messages.stick_obtained")));
@@ -53,6 +57,7 @@ public class StickCommand implements CommandExecutor {
                     ItemStack itemStack = new ItemStack(Material.STICK);
                     ItemMeta meta = itemStack.getItemMeta();
                     meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("items.stick_name")));
+                    meta.setLore(Arrays.asList("SWE"));
                     itemStack.setItemMeta(meta);
                     ((Player) sender).getInventory().addItem(itemStack);
                     sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("messages.stick_obtained")));
@@ -68,6 +73,7 @@ public class StickCommand implements CommandExecutor {
                         ItemStack itemStack = new ItemStack(Material.STICK);
                         ItemMeta meta = itemStack.getItemMeta();
                         meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("items.stick_name")));
+                        meta.setLore(Arrays.asList("SWE"));
                         itemStack.setItemMeta(meta);
                         target.getInventory().addItem(itemStack);
                         target.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getLanguages().getString("messages.stick_obtained")));

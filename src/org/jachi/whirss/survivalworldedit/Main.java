@@ -36,6 +36,13 @@ public class Main extends JavaPlugin {
     private FileConfiguration custom = null;
     private File customFile = null;
 
+    //integrations
+    public boolean worldguard = false;
+
+    //instance
+    private static Main instance;
+    public static Main getInstance() { return instance; }
+
     public void onEnable() {
         RegisterEvents();
         RegisterCommands();
@@ -103,6 +110,21 @@ public class Main extends JavaPlugin {
                     Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "Download: https://www.spigotmc.org/resources/98035/");
                 }
             });
+            if(getConfig().getBoolean("respect.worldguard")) {
+                if((Bukkit.getPluginManager().getPlugin("WorldGuard") == null)) {
+                    Bukkit.getConsoleSender().sendMessage(ChatColor.RED + " ______        _______     _____ ____  ____   ___  ____");
+                    Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "/ ___\\ \\      / | ____|   | ____|  _ \\|  _ \\ / _ \\|  _ \\");
+                    Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "\\___ \\\\ \\ /\\ / /|  _|     |  _| | |_) | |_) | | | | |_) |");
+                    Bukkit.getConsoleSender().sendMessage(ChatColor.RED + " ___) |\\ V  V / | |___    | |___|  _ <|  _ <| |_| |  _ <");
+                    Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "|____/  \\_/\\_/  |_____|   |_____|_| \\_|_| \\_\\\\___/|_| \\_\\");
+                    Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "");
+                    Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "Protection Stones has not been detected on your server.");
+                    Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "Please install it before activating it in the configuration.");
+                } else {
+                    worldguard = true;
+                }
+            }
+            
         } else {
             Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "[SurvivalWorldEdit] It has been detected that you are using a version of Spigot incompatible with the plugin. Disabling plugin...");
             getServer().getPluginManager().disablePlugin(this);
@@ -156,6 +178,15 @@ public class Main extends JavaPlugin {
             }
         }
         return blocks;
+    }
+
+    public static boolean isRegionProtected(Location location) {
+        com.sk89q.worldedit.util.Location loc = com.sk89q.worldedit.bukkit.BukkitAdapter.adapt(location);
+        com.sk89q.worldguard.protection.regions.RegionContainer container = com.sk89q.worldguard.WorldGuard.getInstance().getPlatform().getRegionContainer();
+        com.sk89q.worldguard.protection.regions.RegionQuery query = container.createQuery();
+        com.sk89q.worldguard.protection.ApplicableRegionSet set = query.getApplicableRegions(loc);
+        if (set.size() != 0) return true;
+        return false;
     }
 
     //config files
@@ -361,5 +392,4 @@ public class Main extends JavaPlugin {
             saveCustom();
         }
     }
-
 }

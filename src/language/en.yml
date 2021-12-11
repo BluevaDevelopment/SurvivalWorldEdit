@@ -7,6 +7,7 @@ messages:
   stick_obtained: '&aYou have obtained the stick to use Survival World Edit.'
   stick_delivered: '&aThe stick to use Survival World Edit has been delivered to {player}.'
   offline_player: '&cThis player is not online.'
+  protected_area: '&cYou cannot use Survival World Edit in a protected region.'
   loaded_language: 'The language English has been loaded successfully.'
   correct_use: '&cCorrect use: {correct_use}'
 items:

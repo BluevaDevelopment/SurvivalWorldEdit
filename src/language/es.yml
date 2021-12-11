@@ -7,6 +7,7 @@ messages:
   stick_obtained: '&aHas obtenido el palo para usar Survival World Edit.'
   stick_delivered: '&aEl palo para usar Survival World Edit ha sido entregado a {player}.'
   offline_player: '&cEse jugador no esta en linea.'
+  protected_area: '&cNo puedes utilizar Survival World Edit en una region protegida.'
   loaded_language: 'El idioma Español ha cargado correctamente.'
   correct_use: '&cUso correcto: {correct_use}'
 items:

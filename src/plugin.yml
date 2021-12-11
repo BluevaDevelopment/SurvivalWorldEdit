@@ -1,9 +1,10 @@
 name: SurvivalWorldEdit
-version: 1.0.2
+version: 1.0.3
 main: org.jachi.whirss.survivalworldedit.Main
 author: Whirss
 api-version: 1.17
 load: STARTUP
+softdepend: [WorldGuard]
 
 commands:
   stick:

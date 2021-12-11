@@ -30,3 +30,8 @@ metrics: true
 # French: fr
 # Custom language: custom
 language: en
+
+# Respect:
+# Indicate which plugins you want to be respected when a user uses Survival World Edit.
+respect:
+  worldguard: false

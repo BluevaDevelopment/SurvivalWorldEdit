@@ -7,6 +7,7 @@ messages:
   stick_obtained: '&a().'
   stick_delivered: '&a() {player}.'
   offline_player: '&c().'
+  protected_area: '&c().'
   loaded_language: '().'
   correct_use: '&c(): {correct_use}'
 items:
